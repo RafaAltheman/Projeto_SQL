@@ -15,7 +15,7 @@ cursos = []
 disc = []
 tcc_titulo = []
 disciplinas = [
-    "Introdução à Computação",  # Engenharia Mecânica
+    "Introdução à Computação", # Ciência da Computação
     "Física I", # Eletrica
     "Empreendedorismo",  # Administração
     "Introdução à Administração", # Administração
@@ -28,12 +28,26 @@ disciplinas = [
     "Sistemas Digitais"  # Eletrica
 ]
 
+disciplinas_curso = [
+    "Ciência da Computação",
+    "Engenharia Eletrica",
+    "Administração",
+    "Administração",
+    "Engenharia de Produção",
+    "Ciência da Computação",
+    "Ciência da Computação",
+    "Ciência da Computação",
+    "Engenharia Mecânica",
+    "Engenharia Mecânica",
+    "Engenharia Eletrica"
+]
+
 cursos = [
     "Engenharia Mecânica",
     "Administração",
     "Engenharia de Produção",
     "Ciência da Computação",
-    "Eletrica"
+    "Engenharia Eletrica"
 ]
 
 # Nomes
@@ -71,8 +85,7 @@ resposta_disc = supabase.table("disciplina").select("nome").execute()
 if len(resposta_disc.data) == 0:
     dados_disc = []
     for i in range(len(disciplinas)):
-        dados_disc.append({"nome": disciplinas[i]})
-
+        dados_disc.append({"nome": disciplinas[i], "curso": disciplinas_curso[i]})
     supabase.table("disciplina").insert(dados_disc).execute()
     print("Disciplinas inseridas")
 
@@ -90,13 +103,39 @@ if len(resposta_curso.data) == 0:
 # curso
 # codigo
 # semestre
-resposta_matriz = supabase.table("matrizcurricular").select("nome").execute()
-if len(resposta_curso.data) == 0:
+resposta_matriz = supabase.table("matrizcurricular").select("curso_id").execute()
+if len(resposta_matriz.data) == 0:
     dados_matriz = []
-    id_curso = supabase.table("curso").select("curso").execute()
-    dados_matriz.append(id_curso)
+    
+    resposta_cursos = supabase.table("curso").select("curso", "nome").execute()
+    resposta_disciplina = supabase.table("disciplina").select("codigo_disciplina", "nome", "curso").execute()
+    
+    for curso in resposta_cursos.data:
+        curso_id = curso["curso"]  
+
+        for disc in resposta_disciplina.data:
+            if disc["curso"] == "Ciência da Computação" or disc["curso"] == "Administração" :
+                semestre = randint(1, 8)
+                cod = disc["codigo_disciplina"]
+
+                dados_matriz.append({
+                    "curso_id": curso_id,
+                    "codigo_id": cod,
+                    "semestre": semestre
+                })
+
+            elif "Engenharia" in disc["curso"]:
+                semestre = randint(1, 10)
+                cod = disc["codigo_disciplina"]
+
+                dados_matriz.append({
+                    "curso_id": curso_id,
+                    "codigo_id": cod,
+                    "semestre": semestre
+                })
+
     supabase.table("matrizcurricular").insert(dados_matriz).execute()
-    print("matriz inseridas")
+    print("Matriz Curricular inserida")
 
 
 ## TCC
