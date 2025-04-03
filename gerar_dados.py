@@ -1,5 +1,5 @@
 from faker import Faker
-from random import *
+import random
 from supabase import create_client, Client
 
 fake = Faker('pt-br')
@@ -13,7 +13,6 @@ nome_profs = []
 ra = []
 cursos = []
 disc = []
-tcc_titulo = []
 disciplinas = [
     "Introdução à Computação", # Ciência da Computação
     "Física I", # Eletrica
@@ -48,6 +47,14 @@ cursos = [
     "Engenharia de Produção",
     "Ciência da Computação",
     "Engenharia Eletrica"
+]
+
+tcc_titulos = [
+    "IA na Saúde: Desafios e Soluções",
+    "Transformação Digital nas PMEs",
+    "Gestão Sustentável Urbana",
+    "Big Data em RH: Aplicações",
+    "Educação Digital e Inclusão"
 ]
 
 # Nomes
@@ -85,7 +92,10 @@ resposta_disc = supabase.table("disciplina").select("nome").execute()
 if len(resposta_disc.data) == 0:
     dados_disc = []
     for i in range(len(disciplinas)):
-        dados_disc.append({"nome": disciplinas[i], "curso": disciplinas_curso[i]})
+        dados_disc.append({
+            "nome": disciplinas[i], 
+            "curso": disciplinas_curso[i]
+        })
     supabase.table("disciplina").insert(dados_disc).execute()
     print("Disciplinas inseridas")
 
@@ -100,9 +110,6 @@ if len(resposta_curso.data) == 0:
     print("Cursos inseridos")
 
 ## Matriz Curricular
-# curso
-# codigo
-# semestre
 resposta_matriz = supabase.table("matrizcurricular").select("curso_id").execute()
 if len(resposta_matriz.data) == 0:
     dados_matriz = []
@@ -115,7 +122,7 @@ if len(resposta_matriz.data) == 0:
 
         for disc in resposta_disciplina.data:
             if disc["curso"] == "Ciência da Computação" or disc["curso"] == "Administração" :
-                semestre = randint(1, 8)
+                semestre = random.randint(1, 8)
                 cod = disc["codigo_disciplina"]
 
                 dados_matriz.append({
@@ -125,7 +132,7 @@ if len(resposta_matriz.data) == 0:
                 })
 
             elif "Engenharia" in disc["curso"]:
-                semestre = randint(1, 10)
+                semestre = random.randint(1, 10)
                 cod = disc["codigo_disciplina"]
 
                 dados_matriz.append({
@@ -137,11 +144,27 @@ if len(resposta_matriz.data) == 0:
     supabase.table("matrizcurricular").insert(dados_matriz).execute()
     print("Matriz Curricular inserida")
 
-
 ## TCC
-# titulo
+resposta_tcc = supabase.table("tcc").select("id_tcc", "titulo", "orientador").execute()
+if len(resposta_tcc.data) == 0:
 
-# orientador
+    dados_tcc = []
+    resposta_professoes = supabase.table("professor").select("id_prof").execute()
+    
+    for tcc in tcc_titulos:
+
+        professor_aleatorio = random.choice(resposta_professoes.data)
+        id_orientador = professor_aleatorio["id_prof"]
+        print(id_orientador)
+        dados_tcc.append({
+            "titulo" : tcc,
+            "orientador" : id_orientador
+        })
+
+    print(dados_tcc)
+    supabase.table("tcc").insert(dados_tcc).execute()
+    print("TCCs inseridos")
+
 
 ## TCC Alunos
 # ra_tcc
