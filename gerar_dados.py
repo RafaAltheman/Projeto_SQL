@@ -23,7 +23,7 @@ disciplinas = [
     "Inteligência Artificial", # Ciência da Computação
     "Arquitetura de Computadores", # Ciência da Computação
     "Termodinâmica",  # Engenharia Mecânica
-    "Resistência dos Materiais", # Engenharia Mecânic
+    "Resistência dos Materiais", # Engenharia Mecânica
     "Sistemas Digitais"  # Eletrica
 ]
 
@@ -57,12 +57,12 @@ tcc_titulos = [
     "Educação Digital e Inclusão"
 ]
 
-# Nomes
+departamentos = ["Engenharia", ""]
 
-# verificar se já existem alunos no banco
+# Alunos
 resposta_aluno = supabase.table("alunos").select("nome").execute()
-if len(resposta_aluno.data) == 0:
-    for i in range(15):
+if len(resposta_aluno.data) == 0: # verificar se já existem alunos no banco
+    for i in range(40):
         nome = fake.name()
         nome_alunos.insert(i, nome)
 
@@ -76,7 +76,7 @@ if len(resposta_aluno.data) == 0:
 ## Professor
 resposta_prof = supabase.table("professor").select("nome").execute()
 if len(resposta_prof.data) == 0:
-    for i in range(15):
+    for i in range(10):
         nome = fake.name()
         nome_profs.insert(i, nome)
 
@@ -88,8 +88,8 @@ if len(resposta_prof.data) == 0:
     print("Professores inseridos")
 
 ## Disciplina
-resposta_disc = supabase.table("disciplina").select("nome").execute()
-if len(resposta_disc.data) == 0:
+resposta_disciplina = supabase.table("disciplina").select("codigo_disciplina", "nome", "curso").execute()
+if len(resposta_disciplina.data) == 0:
     dados_disc = []
     for i in range(len(disciplinas)):
         dados_disc.append({
@@ -115,7 +115,6 @@ if len(resposta_matriz.data) == 0:
     dados_matriz = []
     
     resposta_cursos = supabase.table("curso").select("curso", "nome").execute()
-    resposta_disciplina = supabase.table("disciplina").select("codigo_disciplina", "nome", "curso").execute()
     
     for curso in resposta_cursos.data:
         curso_id = curso["curso"]  
@@ -147,27 +146,120 @@ if len(resposta_matriz.data) == 0:
 ## TCC
 resposta_tcc = supabase.table("tcc").select("id_tcc", "titulo", "orientador").execute()
 if len(resposta_tcc.data) == 0:
-
     dados_tcc = []
-    resposta_professoes = supabase.table("professor").select("id_prof").execute()
-    
+    resposta_professores = supabase.table("professor").select("id_prof").execute()
     for tcc in tcc_titulos:
 
-        professor_aleatorio = random.choice(resposta_professoes.data)
+        professor_aleatorio = random.choice(resposta_professores.data)
         id_orientador = professor_aleatorio["id_prof"]
-        print(id_orientador)
         dados_tcc.append({
             "titulo" : tcc,
             "orientador" : id_orientador
         })
 
-    print(dados_tcc)
     supabase.table("tcc").insert(dados_tcc).execute()
     print("TCCs inseridos")
 
 
 ## TCC Alunos
-# ra_tcc
+resposta_tcc_alunos = supabase.table("tccalunos").select("ra_tcc", "id_tcc_aluno").execute()
+if len(resposta_tcc_alunos.data) == 0:
+    dados_tcc_alunos = []
+    ra_alunos = supabase.table("alunos").select("ra").execute()
+    id_tccs = supabase.table("tcc").select("id_tcc").execute()
 
+    # lista com todos os alunos pra verificar depois se nn teve repetição de aluno
+    alunos_disponiveis = []
+    for aluno in ra_alunos.data:
+        alunos_disponiveis.append(aluno["ra"])
+
+    for id in id_tccs.data:
+        # pegar 4 alunos para cada tcc
+        for i in range(4):
+            aluno_aleatorio = random.choice(alunos_disponiveis)
+            print(id["id_tcc"])
+            print(aluno_aleatorio)
+            dados_tcc_alunos.append({
+                "ra_tcc": aluno_aleatorio,
+                "id_tcc_aluno": id["id_tcc"]
+            })
+            alunos_disponiveis.remove(aluno_aleatorio)
+
+    supabase.table("tccalunos").insert(dados_tcc_alunos).execute()
+    print("TCC alunos inseridos")
+
+# Leciona
+resposta_professores = supabase.table("professor").select("id_prof").execute()
+resposta_leciona = supabase.table("leciona").select("semestre", "ano", "periodo", "id_professor", "codigo").execute()
+if len(resposta_leciona.data) == 0:
+    
+    dados_leciona = []
+    
+    for prof in resposta_professores.data:
+        materia = random.choice(resposta_disciplina.data)
+        
+        if materia["curso"] == "Ciência da Computação" or materia["curso"] == "Administração" :
+            semestre = random.randint(1, 8)
+        else:
+            semestre = random.randint(1, 10)
+
+        ano = random.randint(2000, 2040)
+        periodos = ["noturno", "vespertino", "matutino"]
+        
+        dados_leciona.append({
+            "semestre": semestre,
+            "ano": ano,
+            "periodo": random.choice(periodos),
+            "id_professor": prof["id_prof"],
+            "codigo": materia["codigo_disciplina"]
+        })
+
+    supabase.table("leciona").insert(dados_leciona).execute()    
+    print("Leciona inserida")
+
+# Departamento
+
+resposta_departamento = supabase.table("departamento").select("id", "nome").execute()
+if len(resposta_departamento.data) == 0:
+
+    dados_departamento = []
+    
+    for disc in resposta_disciplina.data:
+        prof_aleatorio = random.choice(resposta_professores.data)
+        
+        if disc["curso"] == "Empreendedorismo" or disc["curso"] == "Introdução à Administração":
+            dados_departamento.append({
+                "id": prof_aleatorio["id_prof"],
+                "nome": "Administração"
+            })
+            
+        elif disc["curso"] == "Introdução à Computação" or disc["curso"] == "Algoritmos" or disc["curso"] == "Inteligência         Artificial" or  disc["curso"] == "Arquitetura de Computadores":
+            dados_departamento.append({
+                "id": prof_aleatorio["id_prof"],
+                "nome": "Ciência da Computação"
+            })
+        
+        elif disc["curso"] == "Física I" or disc["curso"] == "Sistemas Digitais":
+            dados_departamento.append({
+                "id": prof_aleatorio["id_prof"],
+                "nome": "Engenharia Elétrica"
+        })
+
+        elif disc["curso"] == "Cálculo Diferencial":
+            dados_departamento.append({
+                "id": prof_aleatorio["id_prof"],
+                "nome": "Engenharia de Produção"
+        })
+
+        elif disc["curso"] == "Termodinâmica" or disc["curso"] == "Resistência dos Materiais":
+            dados_departamento.append({
+                "id": prof_aleatorio["id_prof"],
+                "nome": "Engenharia Mecânica"
+        })
+
+    supabase.table("departamento").insert(dados_departamento).execute()
+    print("Departamentos inserido")
+
+# Prof Departamento
 # Historico Aluno
 #  Historico Professor
