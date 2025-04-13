@@ -52,3 +52,5 @@
 #### 2- Executar o script em Python, certificando-se que todas as tabelas possuam o mesmo nome
 
 #### 3- Rodar as queries uma por uma para testa-lás
+
+### Diagramas MR e MER:
