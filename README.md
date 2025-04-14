@@ -13,37 +13,35 @@
 
 ### A seguir, estão listadas todas as queries implementadas:
 
-#### 1- Histórico escolar de um aluno com reprovação e aprovação em disciplina.
+#### 1- Histórico escolar de um aluno com reprovação e aprovação em disciplina. ✅
 
-#### 2- TCCs orientados por um professor e nomes dos alunos envolvidos.
+#### 2- TCCs orientados por um professor e nomes dos alunos envolvidos. ✅❌
 
-#### 3- Disciplinas em comum na matriz curricular de dois cursos – Parte 1.
+#### 3- Disciplinas em comum na matriz curricular de dois cursos. ✅
 
-#### 4- Disciplinas em comum na matriz curricular de dois cursos – Parte 2.
+#### 4- Disciplinas cursadas por um aluno e professores que lecionaram. ✅
 
-#### 5- Disciplinas cursadas por um aluno e professores que lecionaram.
+#### 5- Chefes de departamento e coordenadores de curso (com substituição de nulos por 'nenhum'). ❌
 
-#### 6- Chefes de departamento e coordenadores de curso (com substituição de nulos por 'nenhum').
+#### 6- Nomes de todos os estudantes. ✅
 
-#### 7- Nomes de todos os estudantes. ✅
+#### 7- IDs e nomes de todos os professores. ✅
 
-#### 8- IDs e nomes de todos os professores. ✅
+#### 8- Nomes de estudantes que cursaram "Física 1". ✅
 
-#### 9- Nomes de estudantes que cursaram "Física 1". ✅
+#### 9- Nomes e RAs dos estudantes orientados por um professor específico.✅❌
 
-#### 10- Nomes e RAs dos estudantes orientados por um professor específico.
+#### 10- Disciplinas ministradas por um professor específico. ✅
 
-#### 11- Disciplinas ministradas por um professor específico. ✅
+#### 11- Cursos ministrados por mais de um professor em semestres diferentes. ✅
 
-#### 12- Cursos ministrados por mais de um professor em semestres diferentes. ✅
+#### 12- Estudantes que não cursaram disciplinas no departamento de Engenharia Elétrica. ✅
 
-#### 13- Estudantes que não cursaram disciplinas no departamento de Engenharia Elétrica. ✅
+#### 13- Número de alunos matriculados em cada curso.❌
 
-#### 14- Número de alunos matriculados em cada curso.
+#### 14- Estudantes que cursaram disciplinas em mais de 3 departamentos. ✅❌
 
-#### 15- Estudantes que cursaram disciplinas em mais de 3 departamentos.
-
-#### 16- Estudantes orientados por professores que lecionam Engenharia Elétrica.
+#### 15- Estudantes orientados por professores que lecionam Engenharia Elétrica. ✅
 
 ### Descrição de como executar o projeto:
 
