@@ -47,9 +47,11 @@
 
 #### 1- Criação do banco de dados em SQL (Supabase).
 
-#### 2- Executar o script em Python.
+#### 2- Colocar a URL e a API key do banco do supabase no código de python, para que o banco receba as informações corretamente.
 
-#### 3- Rodar as queries uma por uma para testa-lás.
+#### 3- Executar o script em Python.
+
+#### 4- Rodar as queries uma por uma para testa-lás.
 
 ### Diagramas MR e MER:
 ![MER](https://github.com/user-attachments/assets/3777d7a1-c82f-444e-98f2-3311db9923ea)
