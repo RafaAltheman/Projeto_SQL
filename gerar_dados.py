@@ -140,26 +140,28 @@ if len(resposta_historico_aluno.data) == 0:
 
     dados_hist_aluno = []
 
-    for aluno in resposta_aluno.data:
-
-        disciplina_aleatoria = random.choice(resposta_disciplina.data)
-        if disciplina_aleatoria[
-                "curso"] == "Ciência da Computação" or disciplina_aleatoria[
-                    "curso"] == "Administração":
-            semestre = random.randint(1, 8)
-        else:
-            semestre = random.randint(1, 10)
-
-        ano = random.randint(2000, 2010)
-        nota = random.randint(0, 10)
-
-        dados_hist_aluno.append({
-            "ra_aluno": aluno["ra"],
-            "codigo": disciplina_aleatoria["codigo_disciplina"],
-            "semestre": semestre, 
-            "ano": ano,  
-            "nota": nota
-        })
+    for i in range(2):
+        for aluno in resposta_aluno.data:
+    
+            disciplina_aleatoria = random.choice(resposta_disciplina.data)
+            if disciplina_aleatoria[
+                    "curso"] == "Ciência da Computação" or disciplina_aleatoria[
+                        "curso"] == "Administração":
+                semestre = random.randint(1, 8)
+            else:
+                semestre = random.randint(1, 10)
+    
+            ano = random.randint(2000, 2010)
+            nota = random.randint(0, 10)
+    
+            dados_hist_aluno.append({
+                "ra_aluno": aluno["ra"],
+                "codigo": disciplina_aleatoria["codigo_disciplina"],
+                "semestre": semestre, 
+                "ano": ano,  
+                "nota": nota
+            })
+        
 
     supabase.table("historico").insert(dados_hist_aluno).execute()
     resposta_historico_aluno = supabase.table("historico").select(
