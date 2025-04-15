@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS leciona
 
 /*1-Mostre todo o histórico escolar de um aluno que teve reprovação em uma disciplina, retornando inclusive a reprovação em um semestre e a aprovação no semestre seguinte ✅*/
 /*
-SELECT a.nome AS aluno, h.ra_aluno, d.nome AS disciplina, h.semestre, h.ano, h.nota
+SELECT a.nome AS aluno, h.ra_aluno, d.nome AS disciplina, h.semestre, h.nota
 FROM historico h
 JOIN alunos a ON a.ra = h.ra_aluno
 JOIN disciplina d ON d.codigo_disciplina = h.codigo
@@ -102,10 +102,6 @@ WHERE (h.ra_aluno, h.codigo) IN (
     AND h1.codigo = h2.codigo
     AND CAST(h1.nota AS FLOAT) < 5
     AND CAST(h2.nota AS FLOAT) >= 5
-    AND (
-      h2.ano > h1.ano OR 
-      (h2.ano = h1.ano AND CAST(h2.semestre AS INT) > CAST(h1.semestre AS INT))
-    )
 )
 ORDER BY a.nome, d.nome, h.ano, h.semestre;
 */
