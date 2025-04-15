@@ -49,7 +49,7 @@
 
 #### 2- Colocar a URL e a API key do banco do supabase no código de python, para que o banco receba as informações corretamente.
 
-#### 3- Executar o script em Python.
+#### 3- Executar o script em Python (rodar 3 vezes para que todos os dados sejam inseridos).
 
 #### 4- Rodar as queries uma por uma para testa-lás.
 
