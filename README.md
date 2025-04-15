@@ -13,42 +13,45 @@
 
 ### A seguir, estão listadas todas as queries implementadas:
 
-#### 1- Histórico escolar de um aluno com reprovação e aprovação em disciplina. ✅
+#### 1- Histórico escolar de um aluno com reprovação e aprovação em disciplina. 
 
-#### 2- TCCs orientados por um professor e nomes dos alunos envolvidos. ✅❌
+#### 2- TCCs orientados por um professor e nomes dos alunos envolvidos. 
 
-#### 3- Disciplinas em comum na matriz curricular de dois cursos. ✅
+#### 3- Disciplinas em comum na matriz curricular de dois cursos. 
 
-#### 4- Disciplinas cursadas por um aluno e professores que lecionaram. ✅
+#### 4- Disciplinas cursadas por um aluno e professores que lecionaram. 
 
-#### 5- Chefes de departamento e coordenadores de curso (com substituição de nulos por 'nenhum'). ❌
+#### 5- Chefes de departamento e coordenadores de curso (com substituição de nulos por 'nenhum'). 
 
-#### 6- Nomes de todos os estudantes. ✅
+#### 6- Nomes de todos os estudantes. 
 
-#### 7- IDs e nomes de todos os professores. ✅
+#### 7- IDs e nomes de todos os professores. 
 
-#### 8- Nomes de estudantes que cursaram "Física 1". ✅
+#### 8- Nomes de estudantes que cursaram "Física 1". 
 
-#### 9- Nomes e RAs dos estudantes orientados por um professor específico.✅❌
+#### 9- Nomes e RAs dos estudantes orientados por um professor específico.
 
-#### 10- Disciplinas ministradas por um professor específico. ✅
+#### 10- Disciplinas ministradas por um professor específico. 
 
-#### 11- Cursos ministrados por mais de um professor em semestres diferentes. ✅
+#### 11- Cursos ministrados por mais de um professor em semestres diferentes. 
 
-#### 12- Estudantes que não cursaram disciplinas no departamento de Engenharia Elétrica. ✅
+#### 12- Estudantes que não cursaram disciplinas no departamento de Engenharia Elétrica. 
 
-#### 13- Número de alunos matriculados em cada curso.❌
+#### 13- Liste os professores que ministraram cursos com mais de 5 alunos matriculados.
 
-#### 14- Estudantes que cursaram disciplinas em mais de 3 departamentos. ✅❌
+#### 14- Encontre os estudantes que cursaram tanto "Sistemas Digitais" quanto "Fisica I".
 
-#### 15- Estudantes orientados por professores que lecionam Engenharia Elétrica. ✅
+#### 15- Estudantes orientados por professores que lecionam Engenharia Elétrica. 
 
 ### Descrição de como executar o projeto:
 
-#### 1- Criação do banco de dados em SQL
+#### 1- Criação do banco de dados em SQL (Supabase).
 
-#### 2- Executar o script em Python, certificando-se que todas as tabelas possuam o mesmo nome
+#### 2- Executar o script em Python.
 
-#### 3- Rodar as queries uma por uma para testa-lás
+#### 3- Rodar as queries uma por uma para testa-lás.
 
 ### Diagramas MR e MER:
+![MER](https://github.com/user-attachments/assets/3777d7a1-c82f-444e-98f2-3311db9923ea)
+
+![MR](https://github.com/user-attachments/assets/9fee31a8-df45-4d79-a6c1-34a355b14f42)
