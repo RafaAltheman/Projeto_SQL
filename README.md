@@ -51,7 +51,7 @@
 
 #### 3- Executar o script em Python.
 
-#### 4- Rodar as queries uma por uma para testa-lás.
+#### 4- Rodar as queries uma por uma para testa-lás (as queries estão comentadas para facilitar rodar uma de cada vez).
 
 ### Diagramas MR e MER:
 ![MER](https://github.com/user-attachments/assets/3777d7a1-c82f-444e-98f2-3311db9923ea)
