@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS leciona
 );
 
 
-/*1-Mostre todo o histórico escolar de um aluno que teve reprovação em uma disciplina, retornando inclusive a reprovação em um semestre e a aprovação no semestre seguinte ✅*/
+/*1-Mostre todo o histórico escolar de um aluno que teve reprovação em uma disciplina, retornando inclusive a reprovação em um semestre e a aprovação no semestre seguinte */
 /*
 SELECT a.nome AS aluno, h.ra_aluno, d.nome AS disciplina, h.semestre, h.nota
 FROM historico h
@@ -105,7 +105,7 @@ WHERE (h.ra_aluno, h.codigo) IN (
 )
 ORDER BY a.nome, d.nome, h.ano, h.semestre;
 */
-/*2-Mostre todos os TCCs orientados por um professor junto com os nomes dos alunos que fizeram o projeto ✅ */
+/*2-Mostre todos os TCCs orientados por um professor junto com os nomes dos alunos que fizeram o projeto  */
 /*
 SELECT 
   t.id_tcc, 
@@ -119,7 +119,7 @@ JOIN alunos a ON ta.ra_tcc = a.ra
 GROUP BY t.id_tcc, t.titulo, p.nome
 ORDER BY t.id_tcc;
 */
-/*3-Mostre a matriz curicular de pelo menos 2 cursos diferentes que possuem disciplinas em comum (e.g., Ciência da Computação e Ciência de Dados). Este exercício deve ser dividido em 2 queries sendo uma para cada curso ✅*/
+/*3-Mostre a matriz curicular de pelo menos 2 cursos diferentes que possuem disciplinas em comum (e.g., Ciência da Computação e Ciência de Dados). Este exercício deve ser dividido em 2 queries sendo uma para cada curso */
 /*
 SELECT 
   c1.nome AS curso,
@@ -149,7 +149,7 @@ WHERE EXISTS (
 */
 
 
-/*4-Para um determinado aluno, mostre os códigos e nomes das diciplinas já cursadas junto com os nomes dos professores que lecionaram a disciplina para o aluno ✅ */
+/*4-Para um determinado aluno, mostre os códigos e nomes das diciplinas já cursadas junto com os nomes dos professores que lecionaram a disciplina para o aluno  */
 /*
 SELECT DISTINCT 
   a.nome AS aluno,
@@ -167,7 +167,7 @@ JOIN professor p ON l.id_professor = p.id_prof
 ORDER BY a.nome, d.nome;
 */
 
-/*5-Liste todos os chefes de departamento e coordenadores de curso em apenas uma query de forma que a primeira coluna seja o nome do professor, a segunda o nome do departamento coordena e a terceira o nome do curso que coordena. Substitua os campos em branco do resultado da query pelo texto "nenhum"✅*/
+/*5-Liste todos os chefes de departamento e coordenadores de curso em apenas uma query de forma que a primeira coluna seja o nome do professor, a segunda o nome do departamento coordena e a terceira o nome do curso que coordena. Substitua os campos em branco do resultado da query pelo texto "nenhum"*/
 /*
 SELECT 
   p.nome AS nome_professor,
@@ -182,15 +182,15 @@ ORDER BY p.nome;
 
 /* mais 10 queires da lista */
 
-/* 6- Encontre os nomes de todos os estudantes. ✅ */
+/* 6- Encontre os nomes de todos os estudantes.  */
 /*
 SELECT nome FROM alunos;
 */
-/* 7- Liste os IDs e nomes de todos os professores.✅ */
+/* 7- Liste os IDs e nomes de todos os professores. */
 /*
 SELECT id_prof, nome FROM professor;
 */
-/* 8- Encontre os nomes de todos os estudantes que cursaram "Física 1" ✅*/
+/* 8- Encontre os nomes de todos os estudantes que cursaram "Física 1" */
 /*
 SELECT * FROM disciplina WHERE nome = 'Física 1';
 SELECT a.nome
@@ -200,7 +200,7 @@ JOIN disciplina d ON h.codigo = d.codigo_disciplina
 WHERE d.nome LIKE '%Física%';
 */
 
-/* 9 - Recupere os nomes e IDs dos estudantes que são orientados por um professor específico ✅*/
+/* 9 - Recupere os nomes e IDs dos estudantes que são orientados por um professor específico */
 /*
 SELECT 
   p.nome AS orientador,
@@ -213,7 +213,7 @@ JOIN alunos a ON a.ra = ta.ra_tcc
 ORDER BY p.nome, a.nome;
 */
 
-/* 10 - Liste as disciplinas que são ministrados pelo professor , juntamente com os títulos dos cursos. ✅*/
+/* 10 - Liste as disciplinas que são ministrados pelo professor , juntamente com os títulos dos cursos. */
 /*
 SELECT 
   p.nome AS professor,
@@ -228,7 +228,7 @@ JOIN curso c ON c.curso = mc.curso_id
 ORDER BY p.nome, c.nome, d.nome;
 */
 
-/* 11 -  Liste os cursos que foram ministrados por mais de um professor em semestres diferentes. ✅*/
+/* 11 -  Liste os cursos que foram ministrados por mais de um professor em semestres diferentes. */
 /*
 SELECT DISTINCT 
   c.nome AS curso,
@@ -252,7 +252,7 @@ WHERE EXISTS (
 ORDER BY c.nome, l1.semestre;
 */
 
-/* 12 - Liste os nomes dos estudantes que não cursaram nenhum curso no departamento de "Engenharia".✅*/
+/* 12 - Liste os nomes dos estudantes que não cursaram nenhum curso no departamento de "Engenharia".*/
 /*
 SELECT a.nome
 FROM alunos a
@@ -267,7 +267,7 @@ WHERE NOT EXISTS (
 );
 */
 
-/* 13 - Liste os professores que ministraram cursos com mais de 5 alunos matriculados. ✅*/
+/* 13 - Liste os professores que ministraram cursos com mais de 5 alunos matriculados. */
 /*
 SELECT 
   p.nome AS professor,
@@ -279,7 +279,7 @@ GROUP BY p.nome
 HAVING COUNT(DISTINCT h.ra_aluno) > 5
 ORDER BY total_alunos DESC;
 */
-/* 14 - Encontre os estudantes que cursaram tanto "Sistemas Digitais" quanto "Fisica I".✅*/
+/* 14 - Encontre os estudantes que cursaram tanto "Sistemas Digitais" quanto "Fisica I".*/
 /*
 SELECT a.nome AS aluno
 FROM alunos a
@@ -298,7 +298,7 @@ AND EXISTS (
     AND d.nome = 'Física I'
 );
 */
-/* 15 - Recupere os nomes dos estudantes que são orientados por um professor que ensina "Sistemas Digitais"✅*/
+/* 15 - Recupere os nomes dos estudantes que são orientados por um professor que ensina "Sistemas Digitais"*/
 /*
 SELECT DISTINCT a.nome
 FROM alunos a
